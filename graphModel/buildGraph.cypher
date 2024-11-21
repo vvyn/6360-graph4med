@@ -34,7 +34,8 @@ id: row.ID
 SET o.order_int = row.INT;
 
 // Loading in Projects
-LOAD CSV WITH HEADERS FROM 'file:///projects.csv' as row
+LOAD CSV WITH HEADERS FROM 'file:///projects.csv' AS row
+WITH row WHERE row.PID IS NOT NULL
 MERGE (p:Project {
 id: row.PID
 })
