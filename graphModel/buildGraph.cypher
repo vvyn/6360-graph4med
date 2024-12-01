@@ -12,12 +12,13 @@ p.maritalStatus = row.MARITAL,
 p.ssn = row.SSN,
 p.ethnicity = row.ETHNICITY,
 p.race = row.RACE,
-p.deathDate = row.DEATHDATE; 
+p.deathDate = row.DEATHDATE,
+p.age = row.AGE; 
 
 //Load Conditions and create relationships between Patients and Conditions via ID 
 LOAD CSV WITH HEADERS FROM 'file:///conditions.csv' AS row
 MATCH (p:Patient {id: row.PATIENT})
-MERGE (c:Condition {code: row.CODE, description: row.DESCRIPTION})
+MERGE (c:Condition {code: row.CODE, description: row.DESCRIPTION, disorder: row.DISORDER})
 SET c.start = row.START,
     c.stop = row.STOP
 MERGE (p)-[:HAS_CONDITION]->(c);
@@ -35,10 +36,9 @@ SET o.order_int = row.INT;
 
 // Loading in Projects
 LOAD CSV WITH HEADERS FROM 'file:///projects.csv' AS row
-WITH row WHERE row.PID IS NOT NULL
-MERGE (p:Project {
-id: row.PID
-})
+WITH row
+WHERE row.PID IS NOT NULL AND row.PID <> ""
+MERGE (p:Project {id: row.PID})
 SET p.name = row.NAME;
 
 //Establish relationship between patients and orders
@@ -49,6 +49,8 @@ CREATE (pat)-[:HAS_ORDER {date:row.ORDER_DATE}]->(ord);
 
 //Establish relationship between patients and projects
 LOAD CSV WITH HEADERS FROM 'file:///projectpatient.csv' AS row
-MATCH (n:Project {id: row.PROJECTID})
+WITH row
+WHERE row.PROJID IS NOT NULL AND row.PROJID <> ""
+MATCH (n:Project {id: row.PROJID})
 MATCH (p:Patient {id: row.PATIENTID})
 CREATE (p)-[:IN_PROJECT]->(n);
