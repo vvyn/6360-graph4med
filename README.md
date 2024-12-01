@@ -14,16 +14,16 @@ The relationships focus mainly on the Patient Entity, and include Patient-Projec
 1. Install Neo4j here: https://neo4j.com/download/
 2. Launch Neo4j Desktop
 3. Create a project, and start it
-4. Download the 8 .CSV files through `data` and `data > generated data`
-   generated_data
-   Order.csv
-   OrderPatient.csv
-   main.py
-   projectpatient.csv
-   projects.csv
-   conditions.csv
-   fusions.csv
-   patients.csv
+4. Download the 8 .CSV files through `data` and `data > generated data` :: 
+   generated_data, 
+   Order.csv, 
+   OrderPatient.csv, 
+   main.py, 
+   projectpatient.csv, 
+   projects.csv, 
+   conditions.csv, 
+   fusions.csv, 
+   patients.csv, 
    reduced_patients.csv
 5. Click on the ••• > Open folder > Import to import the .CSV files into that folder
 6. Click Open to open the database
