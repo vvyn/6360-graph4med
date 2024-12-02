@@ -1,10 +1,10 @@
 // Dashboard cypher queries to display All Patient Informaion
 
-// Number of Patients
+// Number of Patients (Single value)
 MATCH (p:Patient)
 RETURN COUNT(p)
 
-// Patient age distribution (in years)
+// Patient age distribution (in years) (Bar chart)
 MATCH (p:Patient)
 RETURN 
   toInteger(p.age) AS AgeInYears, 
@@ -12,7 +12,7 @@ RETURN
   p.gender AS Gender
 ORDER BY AgeInYears ASC
 
-// Distribution of the patient's age at diagnosis (in years)
+// Distribution of the patient's age at diagnosis (in years) (Bar chart)
 MATCH (p:Patient)-[:HAS_CONDITION]->(c:Condition)
 WHERE c.fusion IS NOT NULL
 RETURN 
@@ -21,7 +21,7 @@ RETURN
     p.gender AS Gender
 ORDER BY AgeAtDiag ASC
 
-// Top 10 most frequent Non-disorders
+// Top 10 most frequent Non-disorders (Bar chart)
 MATCH (p:Patient)-[:HAS_CONDITION]->(c:Condition)
 WHERE c.disorder = 'N'
 RETURN 
@@ -31,7 +31,7 @@ RETURN
 ORDER BY Count DESC
 LIMIT 10
 
-// Most frequent disorders
+// Most frequent disorders (Bar chart)
 MATCH (p:Patient)-[:HAS_CONDITION]->(c:Condition)
 WHERE c.disorder = 'Y'
 RETURN 
