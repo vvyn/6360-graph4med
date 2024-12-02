@@ -1,18 +1,20 @@
+// Dashboard cypher queries for Patient data with Condition data
+
+// Patient-Condition (Graph)
 MATCH (n)-[e]->(m) RETURN n,e,m LIMIT 20
 
-MATCH (n)-[e]-> (m) RETURN COUNT(e) as Patients
+// Number of Patients (Single Value)
+MATCH (p:Patient)
+WITH COUNT(p) AS Patients
+RETURN Patients
 
+// Patient Gender Distribution (Bar Chart)
 MATCH (p:Patient)
 WITH p.gender AS Gender, COUNT(p) AS Patients
 RETURN Gender, Patients
 
-MATCH (p:Patient)
-WITH p.healthcare_coverage AS Coverage, COUNT(p) AS Patients
-RETURN Coverage, Patients
-
+// Patient Race Distribution (Table)
 MATCH (p:Patient)
 WITH p.race AS Race, COUNT(p) AS Patients
 RETURN Race, Patients
-
-Match (p:Patient)-[e]->(c:Condition)
-RETURN c.description AS Condition, COUNT(p) as People, p.gender as Gender
+ORDER BY Patients DESC
