@@ -44,6 +44,9 @@ Link to paper: https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s128
 
 
 ## Example Queries
+(NeoDash dashboard figures can found in the `NeoDash-images` folder)
+
+
 <em> Ex. 1: After populating the model with data, a visualizaton of the Patient- IN_PROJECT relationship can be queried <em> 
 ![image](https://github.com/user-attachments/assets/4671c77a-7883-4076-b09b-f4b90c76109e)
 
